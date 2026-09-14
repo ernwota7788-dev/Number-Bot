@@ -1,4 +1,6 @@
 
 pip install requests
 pip install pyTelegramBotAPI
-
+pyTelegramBotAPI==4.14.0
+requests
+flask
