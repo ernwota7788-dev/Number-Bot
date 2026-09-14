@@ -378,7 +378,7 @@ def send_otp_notification(chat_id, phone, service, otp, message):
         country_line = f"\n🌍 Country : {flag} {country_name}" if country_name else f"\n🌍 Country : {flag}"
         range_line = f"\n🌀 Range : `{range_code}`"
         
-    dm_msg = f"━━━━━━━━━━━━━━━━━━━━\n⚡ Number: `{phone}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`💬 Full SMS:\n`{message[:200]}`{footer}"
+    dm_msg = f"━━━━━━━━━━━━━━━━━━━━\n⚡ Number: `{phone}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`\n💬 Full SMS:\n`{message[:200]}`{footer}"
     group_msg = f"✅ OTP RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n⚡ Number: `{masked}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`\n━━━━━━━━━━━━━━━━━━━━\n💬 Full SMS:\n`{message[:200]}`{footer}"
     
     otp_markup = InlineKeyboardMarkup(row_width=1)
