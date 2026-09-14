@@ -385,10 +385,14 @@ def send_otp_notification(chat_id, phone, service, otp, message):
     otp_markup.row(ibtn(f" {otp} ", copy_text_str=str(otp), style="success"))
     otp_markup.row(ibtn(f" {phone} ", copy_text_str=str(phone), style="primary"))
     
+    # গ্রুপের মেসেজের জন্য আলাদা একটি মার্কআপ তৈরি করা হলো, যেখানে বটের লিংক বাটন থাকবে
+    group_markup = InlineKeyboardMarkup(row_width=1)
+    group_markup.row(ibtn("‼️NUMBER BOT", url="https://t.me/anonymous_core_bot", style="danger")) # এখানে YOUR_BOT_USERNAME এর জায়গায় আপনার বটের ইউজারনেম বসাবেন
     
     try:
         bot.send_message(chat_id, dm_msg, parse_mode="Markdown", reply_markup=otp_markup)
-        bot.send_message(LOG_GROUP_ID, group_msg, parse_mode="Markdown")
+        # এখানে group_markup যুক্ত করে দেওয়া হয়েছে যাতে গ্রুপের মেসেজের নিচেও বাটনটি দেখায়
+        bot.send_message(LOG_GROUP_ID, group_msg, parse_mode="Markdown", reply_markup=group_markup)
     except Exception as e: print(f"Send error: {e}")
 
 def send_number_received_notification(chat_id, numbers, service_name, range_code=None):
@@ -406,7 +410,7 @@ def send_number_received_notification(chat_id, numbers, service_name, range_code
     markup.row(ibtn("🌍 Change Country", callback_data=f"back_to_ranges", style="primary"))
     markup.row(ibtn("💬 OTP GROUP🔗", url="https://t.me/+zaDzeTKnXi84NDhl", style="primary"))
     
-    msg = f"🎯 NEW NUMBERS RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n🎯 Service: {service_name}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n"
+    msg = f"🎗️ NEW NUMBERS ‼️\n━━━━━━━━━━━━━━━━━━━━\n🎯 Service: {service_name}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n"
     bot.send_message(chat_id, msg, parse_mode="Markdown", reply_markup=markup)
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
