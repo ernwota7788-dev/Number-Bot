@@ -378,12 +378,13 @@ def send_otp_notification(chat_id, phone, service, otp, message):
         country_line = f"\n🌍 Country : {flag} {country_name}" if country_name else f"\n🌍 Country : {flag}"
         range_line = f"\n🌀 Range : `{range_code}`"
         
-    dm_msg = f"✅ OTP RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n📱 Number: `{phone}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`\n━━━━━━━━━━━━━━━━━━━━\n📩 Full SMS:\n`{message[:200]}`{footer}"
-    group_msg = f"✅ OTP RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n📱 Number: `{masked}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`\n━━━━━━━━━━━━━━━━━━━━\n📩 Full SMS:\n`{message[:200]}`{footer}"
+    dm_msg = f"━━━━━━━━━━━━━━━━━━━━\n⚡ Number: `{phone}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`💬 Full SMS:\n`{message[:200]}`{footer}"
+    group_msg = f"✅ OTP RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n⚡ Number: `{masked}`\n🎯 Service: {service}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n🔐 OTP Code: `{otp}`\n━━━━━━━━━━━━━━━━━━━━\n💬 Full SMS:\n`{message[:200]}`{footer}"
     
     otp_markup = InlineKeyboardMarkup(row_width=1)
-    otp_markup.row(ibtn(f" {phone} ", copy_text_str=str(phone), style="primary"))
     otp_markup.row(ibtn(f" {otp} ", copy_text_str=str(otp), style="success"))
+    otp_markup.row(ibtn(f" {phone} ", copy_text_str=str(phone), style="primary"))
+    
     
     try:
         bot.send_message(chat_id, dm_msg, parse_mode="Markdown", reply_markup=otp_markup)
@@ -405,7 +406,7 @@ def send_number_received_notification(chat_id, numbers, service_name, range_code
     markup.row(ibtn("🌍 Change Country", callback_data=f"back_to_ranges", style="primary"))
     markup.row(ibtn("💬 OTP GROUP🔗", url="https://t.me/+zaDzeTKnXi84NDhl", style="primary"))
     
-    msg = f"🎯 NEW NUMBERS RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n🎯 Service: {service_name}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n💡 OTP will appear here automatically for active numbers!\n\n👆 নাম্বারগুলোর ওপর চাপ দিলে কপি হবে!"
+    msg = f"🎯 NEW NUMBERS RECEIVED!\n━━━━━━━━━━━━━━━━━━━━\n🎯 Service: {service_name}{country_line}{range_line}\n━━━━━━━━━━━━━━━━━━━━\n"
     bot.send_message(chat_id, msg, parse_mode="Markdown", reply_markup=markup)
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
