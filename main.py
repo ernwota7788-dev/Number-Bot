@@ -6,6 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 ssl._create_default_https_context = ssl._create_unverified_context
 import time
 import threading
+from threading import Thread  # <--- এটি এখানে থাকতে হবে
 import re
 import json
 import os
@@ -17,7 +18,7 @@ import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from telebot import apihelper
 
-# --- ফ্লাস্ক সার্ভার (রেন্ডারে Web Service চালু রাখার জন্য জরুরি) ---
+# --- ফ্লাস্ক সার্ভার ---
 from flask import Flask
 app = Flask('')
 
